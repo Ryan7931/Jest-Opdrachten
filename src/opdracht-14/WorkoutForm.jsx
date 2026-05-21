@@ -8,44 +8,61 @@
 import { useState } from 'react';
 
 function WorkoutForm({ onSubmit }) {
-  // TODO: Maak state voor title, reps, load
+  const [title, setTitle] = useState('');
+  const [reps, setReps] = useState('');
+  const [load, setLoad] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    // TODO: Validatie - check of title niet leeg is
-    // Als title leeg: setError('Title is required') en stop
+    if (!title.trim()) {
+      setError('Title is required');
+      return;
+    }
+  
+    const workout = {
+      title: title,
+      reps: Number(reps),
+      load: Number(load)
+    };
     
-    // TODO: Maak workout object met:
-    // - title (string)
-    // - reps (convert naar number met Number() of parseInt())
-    // - load (convert naar number)
+    if (onSubmit) {
+      onSubmit(workout);
+    }
     
-    // TODO: Roep onSubmit aan met workout object
-    
-    // TODO: Reset form (setTitle(''), setReps(''), setLoad(''))
-    // TODO: Clear error (setError(''))
+    setTitle('');
+    setReps('');
+    setLoad('');
+    setError('');
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      {/* TODO: Title input */}
-      {/* <input 
+      <input 
         type="text"
         placeholder="Exercise title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-      /> */}
-
-      {/* TODO: Reps input (type="number") */}
+      />
       
-      {/* TODO: Load input (type="number") */}
+      <input 
+        type="number"
+        placeholder="Reps"
+        value={reps}
+        onChange={(e) => setReps(e.target.value)}
+      />
       
-      {/* TODO: Submit button */}
-      {/* <button type="submit">Add Workout</button> */}
+      <input 
+        type="number"
+        placeholder="Load (kg)"
+        value={load}
+        onChange={(e) => setLoad(e.target.value)}
+      />
       
-      {/* TODO: Toon error als die er is */}
-      {/* {error && <p>{error}</p>} */}
+      <button type="submit">Add Workout</button>
+      
+      {error && <p>{error}</p>}
     </form>
   );
 }

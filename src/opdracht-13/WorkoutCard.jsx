@@ -6,15 +6,20 @@
  */
 
 function WorkoutCard({ workout, onDelete }) {
-  // TODO: Render een workout card die toont:
-  // - workout.title (in een heading of div)
-  // - workout.reps met "reps" label
-  // - workout.load met "kg" label  
-  // - Delete button die onDelete(workout._id) aanroept
-  
-  // Geef de container div een className="workout-card"
-  
-  return null; // TODO: Vervang met je component
+  const handleDelete = () => {
+    if (onDelete) {
+      onDelete(workout._id);
+    }
+  };
+
+  return (
+    <div className="workout-card">
+      <h3>{workout.title}</h3>
+      <p>{workout.reps} reps</p>
+      <p>{workout.load} kg</p>
+      <button onClick={handleDelete}>Delete</button>
+    </div>
+  );
 }
 
 export default WorkoutCard;
