@@ -43,8 +43,10 @@ describe('Workout Filter (TDD)', () => {
       expect(filterByMaxLoad(workouts, 200)).toHaveLength(4);
     });
 
-    test('geeft lege array bij max = 0', () => {
-      expect(filterByMaxLoad(workouts, 0)).toEqual([]);
+    test('geeft alle workouts met load 0 bij max = 0', () => {
+      expect(filterByMaxLoad(workouts, 0)).toEqual([
+        { title: 'Push ups', reps: 20, load: 0 }
+      ]);
     });
   });
 
